@@ -7,7 +7,6 @@ const Map = withScriptjs(
     <GoogleMap
       defaultZoom={1}
       defaultCenter={{ lat: -34.397, lng: 150.644 }}
-      onClick={e => props.onMapClick(e)}
     >
       {props.marks.map((mark, index) => (
         <Circle
@@ -29,13 +28,7 @@ const Map = withScriptjs(
 );
 
 class MapComponent extends Component {
-  state = {
-    marks: []
-  };
-  
-  setMark = e => {
-    this.setState({ marks: [...this.state.marks, e.latLng] });
-  };
+ 
   
   deleteMarkS = () => {
     this.setState({

@@ -3,7 +3,12 @@ import { setSuggestions, setMapLocations } from '../actions/places.action';
 
 export const fetchSuggestionsByValue = (value) => (dispatch, getState) => {
   const PLACES_API= "https://maps.googleapis.com/maps/api/place/autocomplete/json?input={INPUT}&language=pt_BR&key=AIzaSyD1K_gzX8c9dAAsW8HUt1VDwc9wW9oziUo";
-  axios.get(PLACES_API.replace("{INPUT}", value))
+  // axios.get(PLACES_API.replace("{INPUT}", value))
+  
+  axios.get(PLACES_API.replace("{INPUT}", value), {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    }})
     .then(response => {
       dispatch(setSuggestions(response.data.predictions.map(place => {
         return {
