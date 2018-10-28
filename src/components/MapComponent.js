@@ -5,19 +5,19 @@ const Map = withScriptjs(
   withGoogleMap(props => (
    
     <GoogleMap
-      defaultZoom={1}
-      defaultCenter={{ lat: -34.397, lng: 150.644 }}
+      defaultZoom={3}
+      defaultCenter={{ lat: 3.1390, lng: 101.6869 }}
     >
       {props.marks.map((mark, index) => (
         <Circle
           key={index}
           center={mark}
-          radius={1000}
+          radius={2000}
           options={{
-            strokeColor: "#66009a",
+            strokeColor: "#9a2044",
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: `#66009a`,
+            fillColor: `#9a0600`,
             fillOpacity: 0.35,
             zIndex: 1
           }}
@@ -37,7 +37,7 @@ class MapComponent extends Component {
   };
   
   render() {
-    console.log('HDV this.props.mapLocations', this.props.mapLocations);
+    
     return (
       <div>
         <Map

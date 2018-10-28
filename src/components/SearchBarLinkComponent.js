@@ -7,7 +7,6 @@ import {
 } from '../_thunks/places.thunk';
 
 function mapStateToProps (state, props) {
-  console.log('Redux state', state.placesReducer);
   return {
     suggestions: state['placesReducer'].suggetions,
     mapLocations: state['placesReducer'].mapLocations

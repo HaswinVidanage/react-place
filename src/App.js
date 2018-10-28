@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import { simpleAction } from './actions/simpleAction';
+import { simpleAction } from './_actions/simpleAction';
 import MapComponent from './components/MapComponentLink';
 import SearchBarComponent from './components/SearchBarLinkComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';

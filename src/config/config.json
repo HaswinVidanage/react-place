@@ -1,0 +1,7 @@
+{
+  "GOOGLE" : {
+    "API_KEY": "AIzaSyD1K_gzX8c9dAAsW8HUt1VDwc9wW9oziUo",
+    "PLACES_API": "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input={INPUT}&language=pt_BR&key={API_KEY}",
+    "LOCATION_API": "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid={PLACE_ID}&key={API_KEY}"
+  }
+}

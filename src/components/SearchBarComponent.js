@@ -44,8 +44,6 @@ export default class NavBar extends React.Component {
   
   
   getSuggestionValue(suggestion) {
-    console.log('hdv suggestion.label', suggestion);
-  
     this.props.addLocation(suggestion.place_id);
     return suggestion.label;
   }
@@ -102,7 +100,6 @@ export default class NavBar extends React.Component {
   
   render() {
     
-    console.log('HDV mapLocations: ', this.props.mapLocations);
     const autosuggestProps = {
       renderInputComponent: this.renderInputComponent,
       suggestions: this.props.suggestions? this.props.suggestions: [],

@@ -1,14 +1,13 @@
 import axios from 'axios';
-import { setSuggestions, setMapLocations } from '../actions/places.action';
+import { setSuggestions, setMapLocations } from '../_actions/places.action';
+import * as config from "../config/config.json";
 
 export const fetchSuggestionsByValue = (value) => (dispatch, getState) => {
-  const PLACES_API= "https://maps.googleapis.com/maps/api/place/autocomplete/json?input={INPUT}&language=pt_BR&key=AIzaSyD1K_gzX8c9dAAsW8HUt1VDwc9wW9oziUo";
-  // axios.get(PLACES_API.replace("{INPUT}", value))
-  
-  axios.get(PLACES_API.replace("{INPUT}", value), {
+  axios.get(config.GOOGLE.PLACES_API.replace("{INPUT}", value).replace("{API_KEY}", config.GOOGLE.API_KEY), {
     headers: {
       'Access-Control-Allow-Origin': '*',
-    }})
+    }
+  })
     .then(response => {
       dispatch(setSuggestions(response.data.predictions.map(place => {
         return {
@@ -23,11 +22,11 @@ export const fetchSuggestionsByValue = (value) => (dispatch, getState) => {
 };
 
 export const fetchLocationGeo = (value) => (dispatch, getState) => {
-  const PLACES_API= "https://maps.googleapis.com/maps/api/place/details/json?placeid={PLACE_ID}&key={API_KEY}";
-  const API_KEY = 'AIzaSyD1K_gzX8c9dAAsW8HUt1VDwc9wW9oziUo';
-  
-  axios.get(PLACES_API.replace("{PLACE_ID}", value).replace("{API_KEY}", API_KEY))
-    .then(response => {
+  axios.get(config.GOOGLE.LOCATION_API.replace("{PLACE_ID}", value).replace("{API_KEY}", config.GOOGLE.API_KEY), {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    }
+  }).then(response => {
       dispatch(setMapLocations(response.data.result.geometry.location));
     })
     .catch(error => {
