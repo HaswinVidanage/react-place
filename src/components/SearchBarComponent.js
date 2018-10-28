@@ -11,44 +11,6 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
-
-// const suggestions = [
-//   { label: 'Afghanistan' },
-//   { label: 'Aland Islands' },
-//   { label: 'Albania' },
-//   { label: 'Algeria' },
-//   { label: 'American Samoa' },
-//   { label: 'Andorra' },
-//   { label: 'Angola' },
-//   { label: 'Anguilla' },
-//   { label: 'Antarctica' },
-//   { label: 'Antigua and Barbuda' },
-//   { label: 'Argentina' },
-//   { label: 'Armenia' },
-//   { label: 'Aruba' },
-//   { label: 'Australia' },
-//   { label: 'Austria' },
-//   { label: 'Azerbaijan' },
-//   { label: 'Bahamas' },
-//   { label: 'Bahrain' },
-//   { label: 'Bangladesh' },
-//   { label: 'Barbados' },
-//   { label: 'Belarus' },
-//   { label: 'Belgium' },
-//   { label: 'Belize' },
-//   { label: 'Benin' },
-//   { label: 'Bermuda' },
-//   { label: 'Bhutan' },
-//   { label: 'Bolivia, Plurinational State of' },
-//   { label: 'Bonaire, Sint Eustatius and Saba' },
-//   { label: 'Bosnia and Herzegovina' },
-//   { label: 'Botswana' },
-//   { label: 'Bouvet Island' },
-//   { label: 'Brazil' },
-//   { label: 'British Indian Ocean Territory' },
-//   { label: 'Brunei Darussalam' },
-// ];
-
 export default class NavBar extends React.Component {
   
   constructor(props) {
@@ -59,9 +21,9 @@ export default class NavBar extends React.Component {
       suggestions: [],
     };
     
-    this.getSuggestions = this.getSuggestions.bind(this);
     this.renderSuggestion = this.renderSuggestion.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getSuggestionValue = this.getSuggestionValue.bind(this);
     this.renderInputComponent = this.renderInputComponent.bind(this);
     this.handleSuggestionsClearRequested = this.handleSuggestionsClearRequested.bind(this);
     this.handleSuggestionsFetchRequested = this.handleSuggestionsFetchRequested.bind(this);
@@ -70,28 +32,9 @@ export default class NavBar extends React.Component {
   
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: this.getSuggestions(value),
+      suggestions: this.props.getSuggestions(value),
     });
   };
-  
-  getSuggestions (value) {
-    const inputValue = deburr(value.trim()).toLowerCase();
-    const inputLength = inputValue.length;
-    let count = 0;
-    
-    const suggestions = this.props.places;
-    
-    return inputLength === 0 ? []: suggestions.filter(suggestion => {
-        const keep =
-          count < 5 && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
-        
-        if (keep) {
-          count += 1;
-        }
-        
-        return keep;
-      });
-  }
   
   handleSuggestionsClearRequested = () => {
     this.setState({
@@ -101,6 +44,9 @@ export default class NavBar extends React.Component {
   
   
   getSuggestionValue(suggestion) {
+    console.log('hdv suggestion.label', suggestion);
+  
+    this.props.addLocation(suggestion.place_id);
     return suggestion.label;
   }
   
@@ -155,37 +101,37 @@ export default class NavBar extends React.Component {
   };
   
   render() {
+    
+    console.log('HDV mapLocations: ', this.props.mapLocations);
     const autosuggestProps = {
       renderInputComponent: this.renderInputComponent,
-      suggestions: this.state.suggestions,
+      suggestions: this.props.suggestions? this.props.suggestions: [],
       onSuggestionsFetchRequested: this.handleSuggestionsFetchRequested,
       onSuggestionsClearRequested: this.handleSuggestionsClearRequested,
       getSuggestionValue:this.getSuggestionValue,
       renderSuggestion: this.renderSuggestion,
     };
     
-    
     return (
       <div className="searchbar-wrapper">
         <AppBar position="static">
           <Toolbar>
             <div className="search-form">
-  
+              
               {/*<div className="searchIcon-wrapper ">*/}
-                {/*<SearchIcon />*/}
+              {/*<SearchIcon />*/}
               {/*</div>*/}
               
               {/*<InputBase*/}
-                {/*placeholder="Search…"*/}
-                {/*classes={{*/}
-                  {/*root: "inputRoot",*/}
-                  {/*input: "inputInput",*/}
-                {/*}}*/}
+              {/*placeholder="Search…"*/}
+              {/*classes={{*/}
+              {/*root: "inputRoot",*/}
+              {/*input: "inputInput",*/}
+              {/*}}*/}
               {/*/>*/}
               <Autosuggest
                 {...autosuggestProps}
                 inputProps={{
-                  
                   placeholder: 'Search for a place',
                   value: this.state.single,
                   onChange: this.handleChange('single'),

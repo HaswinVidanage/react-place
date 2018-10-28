@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { simpleAction } from './actions/simpleAction';
-import MapComponent from './components/MapComponent';
-import SearchBarComponent from './components/SearchBarComponent';
+import MapComponent from './components/MapComponentLink';
+import SearchBarComponent from './components/SearchBarLinkComponent';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 
